@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/createMember.css}" />
+    <meta charset="UTF-8">
+    <title>Create new member</title>
+</head>
+<body>
+
+<p>Velkommen, opret venligst din bruger</p>
+
+<form th:action="@{/createMember}" th:object="${member}" method="post">
+<label>Name</label>
+<input type="text" th:field="*{name}">
+
+<label>Password</label>
+<input type="password" th:field="*{password}">
+
+<label>Email</label>
+<input type="text" th:field="*{email}">
+
+<label>PhoneNumber</label>
+<input type="text" th:field="*{phoneNumber}">
+
+<button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
