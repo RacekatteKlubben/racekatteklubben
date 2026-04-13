@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste af katte</title>
+</head>
+
+<body>
+
+<h1>Liste af katte</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Mother</th>
+        <th>Father</th>
+        <th>Color</th>
+        <th>Race</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="cat : ${cats}">
+        <td th:text="${cat.name}"></td>
+        <td th:text="${cat.mom}"></td>
+        <td th:text="${cat.dad}"></td>
+        <td th:text="${cat.color}"></td>
+        <td th:text="${cat.race}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

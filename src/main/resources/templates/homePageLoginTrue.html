@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/homePageLoginTrue.css}" />
+    <meta charset="UTF-8">
+    <title>RaceKatteklubben</title>
+
+</head>
+
+<body>
+
+
+<div class="header">
+    <div class="header-left">
+        RaceKatteKlubben
+    </div>
+
+    <div class="header-right">
+        <span th:text="${member.email}">Bruger</span>
+
+        <form th:action="@{/logout}" method="post" class="logout-btn">
+            <button type="submit">Log ud</button>
+        </form>
+    </div>
+</div>
+
+<div class="menu">
+
+    <p><a href="/catPage">Se dine katte</a></p>
+    <p><a href="/order">Se din katte tunering</a></p>
+    <p><a href="/profile">Se profil</a></p>
+    <p><a href="/createCat">Opret en kat</a></p>
+
+</div>
+
+</body>
+</html>

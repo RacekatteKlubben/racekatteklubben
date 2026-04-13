@@ -1,7 +1,9 @@
 package com.example.racekatteklubben.controller;
 
 import com.example.racekatteklubben.domain.Cat;
+import com.example.racekatteklubben.domain.Member;
 import com.example.racekatteklubben.service.CatService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +18,6 @@ public class CatController {
         this.catService = catService;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        return "index";
-    }
-
     @GetMapping("/createCat")
     public String createCat(Model model) {
         model.addAttribute("cat", new Cat());
@@ -28,20 +25,29 @@ public class CatController {
     }
 
     @PostMapping("/createCat")
-    public String createCat(@ModelAttribute Cat cat, Model model) {
-        try {
-            catService.createCat(cat);
-            model.addAttribute("cat", cat);
-            return "redirect:/catPage";
-        } catch (Exception ex){
-            System.out.println("Error"+ ex.getMessage());
+    public String createCat(@ModelAttribute Cat cat, HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+        System.out.println("Member in session: " + session.getAttribute("member"));
+        if (member == null){
+            return "redirect:/login";
         }
-        return "createCat";
+
+        catService.createCat(cat, member.getMemberId());
+        model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
+        return "catPage";
     }
 
     @GetMapping("/catPage")
-    public String catPage(Model model) {
-        model.addAttribute("cats", catService.findAllCats());
+    public String catPage(HttpSession session, Model model) {
+
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
         return "catPage";
     }
+
 }

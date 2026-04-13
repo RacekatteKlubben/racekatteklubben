@@ -10,14 +10,19 @@ public class Member {
     private String email;
     private String phoneNumber;
     private List<Cat> cats;
+    private boolean currentLogin;
 
-    public Member(int memberId, String name, String password, String email, String phoneNumber) {
+    public Member(int memberId, String name, String password, String email, String phoneNumber, boolean currentLogin) {
         this.memberId = memberId;
         this.name = name;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.cats = new ArrayList<>();
+        this.currentLogin = currentLogin;
+    }
+
+    public Member() {
     }
 
     public int getMemberId() {
@@ -62,5 +67,11 @@ public class Member {
 
     public void setCats(List<Cat> cats) {
         this.cats = cats;
+    }
+
+    public boolean isCurrentLogin(){
+        return currentLogin;
+    }
+    public void setCurrentLogin(boolean currentLogin){
     }
 }

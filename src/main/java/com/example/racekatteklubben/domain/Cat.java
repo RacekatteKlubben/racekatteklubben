@@ -7,14 +7,16 @@ public class Cat {
     private String dad;
     private String color;
     private Race race;
+    private int memberId;
 
-    public Cat(int catId, String catName, String momCat, String dadCat, String color, Race race) {
+    public Cat(int catId, String catName, String momCat, String dadCat, String color, Race race, int memberId) {
         this.catId = catId;
         this.name = catName;
         this.mom = momCat;
         this.dad = dadCat;
         this.color = color;
         this.race = race;
+        this.memberId = memberId;
     }
 
     public Cat() {
@@ -62,5 +64,12 @@ public class Cat {
 
     public void setRace(Race race) {
         this.race = race;
+    }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
     }
 }
