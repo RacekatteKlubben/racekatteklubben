@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opdater medlem – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Opdater dine oplysninger</h2>
+
+    <p th:if="${errorMessage}" th:text="${errorMessage}" class="error"></p>
+
+    <form th:action="@{/updateMember}" th:object="${member}" method="post">
+
+        <label for="name">Navn</label>
+        <input type="text" id="name" th:field="*{name}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" required>
+
+        <label for="phoneNumber">Telefonnummer</label>
+        <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" required>
+
+        <label for="password">Adgangskode</label>
+        <input type="password" id="password" th:field="*{password}" required>
+
+        <button type="submit">Gem ændringer</button>
+
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </form>
+
+    <div class="links">
+        <p>
+            <a href="/profile">Tilbage til din profil</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

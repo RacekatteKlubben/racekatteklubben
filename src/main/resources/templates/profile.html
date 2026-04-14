@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Se din profil – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Her er din profil</h2>
+
+    <div>
+        <p><strong>Navn:</strong> <span th:text="${session.member.name}">Navn</span></p>
+        <!--<p><strong>Adresse:</strong> <span th:text="${member.address}">Addresse</span></p>-->
+        <p><strong>Telefon:</strong> <span th:text="${session.member.phoneNumber}">Telefon</span></p>
+        <p><strong>E-mail:</strong> <span th:text="${session.member.email}">E-mail</span></p>
+    </div>
+
+    <h3>Mine katte</h3>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Katte navn</th>
+                <th>Mor</th>
+                <th>Far</th>
+                <th>Farve</th>
+                <th>Race</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cat : ${cats}">
+                <td th:text="${cat.name}"></td>
+                <td th:text="${cat.mom}"></td>
+                <td th:text="${cat.dad}"></td>
+                <td th:text="${cat.color}"></td>
+                <td th:text="${cat.race}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:unless="${cats != null and !cats.isEmpty()}">
+        <p>Du har ikke nogen katte</p>
+    </div>
+
+    <div class="links">
+        <a href="/updateMember">Opdater profil</a>
+        <br>
+        <a href="/">Tilbage til forsiden</a>
+
+        <form th:action="@{/deleteMember}" th:object="${member}" method="post">
+            <button type="submit">Slet profil</button>
+            <div th:if="${error}" class="error" th:text="${error}"></div>
+            </form>
+
+    </div>
+</div>
+
+</body>
+</html>
