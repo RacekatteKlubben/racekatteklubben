@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/index.css}">
+    <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
+
 <body>
 
-<a href="/createCat">Gå til Opret kat</a>
-<a href="/login">Gå til Login</a>
-<a href="/createMember">Gå til Opret bruger</a>
+<div class="container">
+    <h1>Racekatteklubben</h1>
+    <p>Administrér dine katte og din profil nemt og hurtigt.</p>
+
+    <div class="buttons">
+        <a href="/login">Log ind</a>
+        <a href="/createMember" class="secondary">Opret bruger</a>
+    </div>
+</div>
 
 </body>
 </html>

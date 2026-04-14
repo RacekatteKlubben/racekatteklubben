@@ -4,6 +4,8 @@ import com.example.racekatteklubben.domain.Member;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepository implements IMemberRepository {
 
@@ -23,6 +25,11 @@ public class MemberRepository implements IMemberRepository {
                 member.getEmail(),
                 member.getPhoneNumber()
         );
+    }
+
+
+    public void searchMembers(String query) {
+
     }
 
     public void updateMember(Member member) {
@@ -56,4 +63,32 @@ public class MemberRepository implements IMemberRepository {
                 )
         );
     }
+
+
+    public List<Member> memberSearch(String query) {
+        String sql = "SELECT memberId, name, email, password, phoneNumber " +
+                "FROM members " +
+                "WHERE name LIKE ? OR email LIKE ?";
+
+        String searchParam = "%" + query + "%";
+
+        return jdbcTemplate.query(sql, new Object[]{searchParam, searchParam}, (rs, rowNum) ->
+                new Member(
+                        rs.getInt("memberId"),
+                        rs.getString("name"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("phoneNumber"),
+                        true
+                )
+        );
+    }
+
+    public void deleteMember(int memberId){
+        String sql = "DELETE FROM members WHERE memberid = ?";
+
+        jdbcTemplate.update(sql, memberId);
+    }
+
+
 }

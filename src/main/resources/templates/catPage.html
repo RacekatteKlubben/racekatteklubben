@@ -1,36 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Liste af katte</title>
+    <title>Liste af Katte – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
-
 <body>
 
-<h1>Liste af katte</h1>
+<div class="container">
+    <h2>Liste af Katte</h2>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Mother</th>
-        <th>Father</th>
-        <th>Color</th>
-        <th>Race</th>
-    </tr>
-    </thead>
+    <table>
+        <thead>
+        <tr>
+            <th>Katte navn</th>
+            <th>Mor</th>
+            <th>Far</th>
+            <th>Farve</th>
+            <th>Race</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cat : ${cats}">
+            <td th:text="${cat.name}"></td>
+            <td th:text="${cat.mom}"></td>
+            <td th:text="${cat.dad}"></td>
+            <td th:text="${cat.color}"></td>
+            <td th:text="${cat.race}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-    <tbody>
-    <tr th:each="cat : ${cats}">
-        <td th:text="${cat.name}"></td>
-        <td th:text="${cat.mom}"></td>
-        <td th:text="${cat.dad}"></td>
-        <td th:text="${cat.color}"></td>
-        <td th:text="${cat.race}"></td>
-    </tr>
-    </tbody>
-</table>
+    <div class="links">
+        <a href="/">Tilbage til forsiden</a>
+    </div>
+</div>
 
 </body>
 </html>

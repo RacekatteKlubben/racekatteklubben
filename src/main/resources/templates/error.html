@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/error.css}">
     <meta charset="UTF-8">
-    <title>Fejl</title>
+    <title>Fejl – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/error.css}">
+    <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
 <body>
 
-<h1>Der skete en fejl</h1>
+<div class="container">
+    <h2>Der skete en fejl</h2>
 
-<p th:text="${message}">Noget gik galt</p>
+    <p th:text="${message}" class="error-message">Noget kritisk er gået galt. Kontakt en administrator</p>
 
-<a href="/">Vend tilbage til Opret</a>
+    <div class="links">
+        <a href="/">Vend tilbage til forsiden</a>
+    </div>
+</div>
+
 </body>
 </html>

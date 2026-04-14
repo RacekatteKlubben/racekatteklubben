@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/createMember.css}" />
     <meta charset="UTF-8">
-    <title>Create new member</title>
+    <title>Opret bruger – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
+
 <body>
 
-<p>Velkommen, opret venligst din bruger</p>
+<div class="container">
+    <h2>Opret bruger</h2>
 
-<form th:action="@{/createMember}" th:object="${member}" method="post">
-<label>Name</label>
-<input type="text" th:field="*{name}">
+    <form th:action="@{/createMember}" th:object="${member}" method="post">
 
-<label>Password</label>
-<input type="password" th:field="*{password}">
+        <label>Navn</label>
+        <input type="text" th:field="*{name}" required>
 
-<label>Email</label>
-<input type="text" th:field="*{email}">
+        <label>Email</label>
+        <input type="email" th:field="*{email}" required>
 
-<label>PhoneNumber</label>
-<input type="text" th:field="*{phoneNumber}">
+        <label>Password</label>
+        <input type="password" th:field="*{password}" required>
 
-<button type="submit">Submit</button>
+        <label>Telefonnummer</label>
+        <input type="tel" th:field="*{phoneNumber}" required>
 
-</form>
+        <button type="submit">Opret konto</button>
+
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </form>
+
+    <div class="links">
+        <p>
+            Har du allerede en konto?
+            <a href="/login">Log ind</a>
+        </p>
+        <p>
+            <a href="/">Tilbage til forsiden</a>
+        </p>
+    </div>
+</div>
 
 </body>
 </html>

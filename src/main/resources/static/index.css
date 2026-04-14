@@ -1,0 +1,27 @@
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.buttons a {
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    background-color: #4a90e2;
+    transition: background-color 0.2s ease;
+}
+
+.buttons a:hover {
+    background-color: #357ab8;
+}
+
+.secondary {
+    background-color: #7b8a8b;
+}
+
+.secondary:hover {
+    background-color: #5f6a6a;
+}

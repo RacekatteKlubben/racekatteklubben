@@ -10,7 +10,6 @@
 
 <body>
 
-
 <div class="header">
     <div class="header-left">
         RaceKatteKlubben
@@ -19,7 +18,7 @@
     <div class="header-right">
         <span th:text="${member.email}">Bruger</span>
 
-        <form th:action="@{/logout}" method="post" class="logout-btn">
+        <form th:action="@{logout}" method="post" class="logout-btn">
             <button type="submit">Log ud</button>
         </form>
     </div>
@@ -32,6 +31,47 @@
     <p><a href="/profile">Se profil</a></p>
     <p><a href="/createCat">Opret en kat</a></p>
 
+</div>
+
+<div class="content">
+    <h2>Søg efter medlemmer</h2>
+    <form th:action="@{/memberSearch}" method="get">
+        <input type="text" name="query" placeholder="Søg på navn eller email..." required />
+        <button type="submit">Søg</button>
+    </form>
+
+    <div th:if="${results != null}">
+        <h3 th:if="${!results.isEmpty()}">Resultater</h3>
+        <p th:if="${results.isEmpty()}">Ingen medlemer fundet</p>
+
+        <table th:if="${!results.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Navn</th>
+                    <th>Katte</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="member : ${results}">
+                    <td>
+                        <strong th:text="${member.name}">Navn</strong><br>
+                        <small th:text="${member.email}">Navn</small>
+                    </td>
+                    <td>
+                        <ul th:if="${member.cats != null and !member.cats.isEmpty()}">
+                            <li th:each="cat : ${member.cats}">
+                                <strong th:text="${cat.name}">Navn</strong><br>
+                                Mor: <span th:text="${cat.mom}">Mor</span><br>
+                                Far: <span th:text="${cat.dad}">Far</span><br>
+                                Farve: <span th:text="${cat.color}">Farve</span><br>
+                                Race: <span th:text="${cat.race}">Race</span><br>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

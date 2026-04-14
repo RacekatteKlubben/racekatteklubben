@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
+
 <body>
-<h2>Login</h2>
 
-<form th:action="@{/login}" method="post" th:object="${loginForm}">
+<div class="container">
+    <h2>Log ind</h2>
 
-    <label>Email</label>
-    <input type="email" th:field="*{email}" /><br>
+    <form th:action="@{/login}" method="post" th:object="${loginForm}" th:field="*{email}" required>
 
-    <label>Password</label>
-    <input type="password" th:field="*{password}" /><br>
+        <label>Email </label>
+        <input type=email th:field="*{email}">
 
-    <button type="submit">Login</button>
+        <label>Password</label>
+        <input type="password" th:field="*{password}" required>
 
-    <p th:if="${error}" th:text="${error}"><
-</form>
+        <button type="submit">Login</button>
+
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </form>
+
+    <div class="links">
+        <p>
+            Har du ikke en konto?
+            <a href="/createMember">Opret bruger</a>
+        </p>
+        <p>
+            <a href="/">Tilbage til forsiden</a>
+        </p>
+    </div>
+</div>
 
 </body>
 </html>

@@ -19,6 +19,8 @@ CREATE TABLE cats
     color VARCHAR(100) NOT NULL,
     race  ENUM('BRITISH_SHORTHAIR', 'MAINE_COON', 'NORSK_SKOVKAT') NOT NULL,
     memberId INT,
-    FOREIGN KEY (memberId) REFERENCES members(memberId)
+    FOREIGN KEY (memberId)
+    REFERENCES members(memberId)
+    ON DELETE CASCADE
 );
 

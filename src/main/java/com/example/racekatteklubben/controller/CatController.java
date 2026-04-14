@@ -3,6 +3,7 @@ package com.example.racekatteklubben.controller;
 import com.example.racekatteklubben.domain.Cat;
 import com.example.racekatteklubben.domain.Member;
 import com.example.racekatteklubben.service.CatService;
+import com.example.racekatteklubben.service.validation.ValidationExceptionCat;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +28,19 @@ public class CatController {
     @PostMapping("/createCat")
     public String createCat(@ModelAttribute Cat cat, HttpSession session, Model model) {
         Member member = (Member) session.getAttribute("member");
-        System.out.println("Member in session: " + session.getAttribute("member"));
+
         if (member == null){
             return "redirect:/login";
         }
 
-        catService.createCat(cat, member.getMemberId());
-        model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
-        return "catPage";
+        try {
+            catService.createCat(cat, member.getMemberId());
+            model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
+            return "catPage";
+        } catch (ValidationExceptionCat ec){
+            model.addAttribute("error", ec.getMessage());
+            return "createCat";
+        }
     }
 
     @GetMapping("/catPage")
@@ -49,5 +55,4 @@ public class CatController {
         model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
         return "catPage";
     }
-
 }
