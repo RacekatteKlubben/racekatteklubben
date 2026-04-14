@@ -49,6 +49,10 @@ public class Member {
         return cats;
     }
 
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -73,5 +77,6 @@ public class Member {
         return currentLogin;
     }
     public void setCurrentLogin(boolean currentLogin){
+        this.currentLogin = currentLogin;
     }
 }
