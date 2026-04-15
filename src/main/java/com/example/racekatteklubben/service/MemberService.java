@@ -13,16 +13,19 @@ import java.util.List;
 public class MemberService {
     private final IMemberRepository iMemberRepository;
     private final Validation validate;
+    private final PasswordService passwordService;
 
-    public MemberService(IMemberRepository iMemberRepository, Validation validate) {
+    public MemberService(IMemberRepository iMemberRepository, Validation validate, PasswordService passwordService) {
         this.iMemberRepository = iMemberRepository;
         this.validate = validate;
+        this.passwordService = passwordService;
     }
 
     //Oprettelse af user og opdatering af member
     public void createMember(Member member){
         validate.validateMember(member);
         try {
+            member.setPassword(passwordService.hash(member.getPassword()));
             iMemberRepository.createMember(member);
         } catch (ValidationExceptionMember ex) {
             throw new ValidationExceptionMember("Fejl ved oprettelse af medlemskab");
@@ -31,6 +34,10 @@ public class MemberService {
     public void updateMember(Member member) {
         validate.validateMember(member);
         try {
+            String password = member.getPassword();
+            if (!password.startsWith("$2")) {
+                member.setPassword(passwordService.hash(password));
+            }
             iMemberRepository.updateMember(member);
         } catch (ValidationExceptionMember ex) {
             throw new ValidationExceptionMember("Fejl ved opdatering af din profil");
@@ -46,7 +53,7 @@ public class MemberService {
             throw new ValidationExceptionMember("Forkert Email eller Password");
         }
 
-        if (!dbMember.getPassword().equals(loginMember.getPassword())) {
+        if (!passwordService.matches(loginMember.getPassword(), dbMember.getPassword())) {
             throw new ValidationExceptionMember("Forkert Email eller Password");
         }
 
@@ -65,4 +72,11 @@ public class MemberService {
             throw new ValidationExceptionMember("Fejl ved sletning af bruger");
         }
     }
+
+
+    public List<Member> findAllMembers() {
+        return iMemberRepository.findAllMembers();
+    }
+
+
 }

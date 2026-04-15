@@ -71,7 +71,7 @@ public class MemberRepository implements IMemberRepository {
                 new Member(
                         rs.getInt("memberId"),
                         rs.getString("name"),
-                        rs.getString("password"),
+                        null,
                         rs.getString("email"),
                         rs.getString("phoneNumber"),
                         true
@@ -85,5 +85,19 @@ public class MemberRepository implements IMemberRepository {
         jdbcTemplate.update(sql, memberId);
     }
 
+    public List<Member> findAllMembers() {
+        String sql = "SELECT * FROM members";
+
+        return jdbcTemplate.query(sql, (rs, rowNum) ->
+                new Member(
+                        rs.getInt("memberId"),
+                        rs.getString("name"),
+                        null,
+                        rs.getString("email"),
+                        rs.getString("phoneNumber"),
+                        true
+                )
+        );
+    }
 
 }

@@ -10,5 +10,6 @@ public interface IMemberRepository {
     void updateMember(Member member);
     void createMember(Member member);
     List<Member> memberSearch(String query);
+    List<Member> findAllMembers();
     void deleteMember(int memberId);
 }

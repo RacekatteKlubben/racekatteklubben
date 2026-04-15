@@ -30,10 +30,11 @@
     <p><a href="/catShows">Se din katte tunering</a></p>
     <p><a href="/profile">Se profil</a></p>
     <p><a href="/createCat">Opret en kat</a></p>
+    <p><a href="/allMembers">Se alle medlemer</a></p>
 
 </div>
 
-<div class="content">
+<div class="container">
     <h2>Søg efter medlemmer</h2>
     <form th:action="@{/memberSearch}" method="get">
         <input type="text" name="query" placeholder="Søg på navn eller email..." required />
