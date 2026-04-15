@@ -22,11 +22,32 @@
         </thead>
         <tbody>
         <tr th:each="cat : ${cats}">
+            <td>
+                <img th:if="${cat.image != null}"
+                     th:src="@{/catImage/{id}(id=${cat.catId})}"
+                     alt="Kat"
+                     style="width: 100px;" />
+            </td>
             <td th:text="${cat.name}"></td>
             <td th:text="${cat.mom}"></td>
             <td th:text="${cat.dad}"></td>
             <td th:text="${cat.color}"></td>
             <td th:text="${cat.race}"></td>
+
+            <td>
+                <form th:action="@{/updateCat}" method="get">
+                    <input type="hidden" name="catId" th:value="${cat.catId}">
+                    <button type="submit">Rediger</button>
+                </form>
+
+                <form th:action="@{/deleteCat}" method="post">
+                    <input type="hidden" name="catId" th:value="${cat.catId}">
+                    <button type="submit">Slet</button>
+                </form>
+            </td>
+
+            <th>Billede</th>
+
         </tr>
         </tbody>
     </table>

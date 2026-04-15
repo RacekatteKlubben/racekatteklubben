@@ -2,15 +2,16 @@
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Opret kat – Racekatteklubben</title>
+    <title>Opdater – Racekatteklubben</title>
     <link rel="stylesheet" th:href="@{/universal.css}">
 </head>
 <body>
 
 <div class="container">
-    <h2>Opret ny kat</h2>
+    <h2>Opdater Dine Katte Oplysninger</h2>
 
-    <form th:action="@{/createCat}" th:object="${cat}" method="post">
+    <form th:action="@{/updateCat}" th:object="${cat}" method="post">
+        <input type="hidden" th:field="*{catId}" />
 
         <label for="name">Navn</label>
         <input type="text" id="name" th:field="*{name}" required>
@@ -34,7 +35,7 @@
         <label for="image">Billede af katten</label>
         <input type="file" id="image" name="image" accept="image/*">
 
-        <button type="submit">Opret kat</button>
+        <button type="submit">Gem ændringer</button>
         <div th:if="${error}" class="error" th:text="${error}"></div>
     </form>
 

@@ -155,4 +155,20 @@ public class MemberController {
     }
 
 
+    @GetMapping("/allMembers")
+    public String showAllMembers(Model model, HttpSession session) {
+        Member loggedInMember = (Member) session.getAttribute("member");
+        if (loggedInMember == null) {
+            return "redirect:/login";
+        }
+
+        List<Member> allMembers = memberService.findAllMembers();
+
+        model.addAttribute("member", loggedInMember);
+        model.addAttribute("allMembers", allMembers);
+        return "allMembers";
+    }
+
+
+
 }

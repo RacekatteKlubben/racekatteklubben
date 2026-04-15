@@ -8,8 +8,9 @@ public class Cat {
     private String color;
     private Race race;
     private int memberId;
+    private byte[] image;
 
-    public Cat(int catId, String catName, String momCat, String dadCat, String color, Race race, int memberId) {
+    public Cat(int catId, String catName, String momCat, String dadCat, String color, Race race, int memberId, byte[] image) {
         this.catId = catId;
         this.name = catName;
         this.mom = momCat;
@@ -17,6 +18,7 @@ public class Cat {
         this.color = color;
         this.race = race;
         this.memberId = memberId;
+        this.image = image;
     }
 
     public Cat() {
@@ -24,6 +26,10 @@ public class Cat {
 
     public int getCatId() {
         return catId;
+    }
+
+    public void setCatId(int catId) {
+        this.catId = catId;
     }
 
     public String getName() {
@@ -71,5 +77,14 @@ public class Cat {
     }
 
     public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 }

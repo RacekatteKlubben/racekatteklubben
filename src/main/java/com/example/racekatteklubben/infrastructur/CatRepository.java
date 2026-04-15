@@ -1,6 +1,7 @@
 package com.example.racekatteklubben.infrastructur;
 
 import com.example.racekatteklubben.domain.Cat;
+import com.example.racekatteklubben.domain.Member;
 import com.example.racekatteklubben.domain.Race;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public class CatRepository implements ICatRepository {
     }
 
     public void createCat(Cat cat, int memberId) {
-        String sql = "INSERT INTO cats(name, mom, dad, color, race, memberId) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cats(name, mom, dad, color, race, memberId, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(
                 sql,
@@ -26,7 +27,8 @@ public class CatRepository implements ICatRepository {
                 cat.getDad(),
                 cat.getColor(),
                 cat.getRace().name(),
-                memberId
+                memberId,
+                cat.getImage()
         );
     }
 
@@ -41,7 +43,8 @@ public class CatRepository implements ICatRepository {
                         rs.getString("dad"),
                         rs.getString("color"),
                         Race.valueOf(rs.getString("race")),
-                        rs.getInt("memberId")
+                        rs.getInt("memberId"),
+                        rs.getBytes("image")
                 )
         );
     }
@@ -57,12 +60,50 @@ public class CatRepository implements ICatRepository {
                         rs.getString("dad"),
                         rs.getString("color"),
                         Race.valueOf(rs.getString("race")),
-                        rs.getInt("memberId")
+                        rs.getInt("memberId"),
+                        rs.getBytes("image")
                 )
         );
     }
 
+    @Override
+    public Cat findById(int catId) {
+        String sql = "SELECT * FROM cats WHERE catId = ?";
 
+        return jdbcTemplate.queryForObject(sql, new Object[]{catId}, (rs, rowNum) ->
+                new Cat(
+                        rs.getInt("catId"),
+                        rs.getString("name"),
+                        rs.getString("mom"),
+                        rs.getString("dad"),
+                        rs.getString("color"),
+                        Race.valueOf(rs.getString("race")),
+                        rs.getInt("memberId"),
+                        rs.getBytes("image")
+                )
+        );
+    }
+
+    public void updateCat(Cat cat) {
+        String Sql = "UPDATE cats SET name= ?, mom = ?, dad = ?, color = ?, race = ?, image = ? WHERE catId = ? AND memberId = ?";
+
+        int rows = jdbcTemplate.update(Sql,
+                cat.getName(),
+                cat.getMom(),
+                cat.getDad(),
+                cat.getColor(),
+                cat.getRace().name(),
+                cat.getCatId(),
+                cat.getMemberId(),
+                cat.getImage()
+        );
+    }
+
+    public void deleteCat(int catId){
+        String sql = "DELETE FROM cats WHERE catId = ?";
+
+        jdbcTemplate.update(sql,catId);
+    }
 }
 
 

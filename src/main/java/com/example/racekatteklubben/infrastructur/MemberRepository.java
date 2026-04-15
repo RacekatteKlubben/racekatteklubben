@@ -27,11 +27,6 @@ public class MemberRepository implements IMemberRepository {
         );
     }
 
-
-    public void searchMembers(String query) {
-
-    }
-
     public void updateMember(Member member) {
         String Sql = "UPDATE members SET name= ?, password = ?, email = ?, phonenumber = ? WHERE memberid = ?";
 

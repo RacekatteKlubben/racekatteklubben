@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS catshow_registrations;
+DROP TABLE IF EXISTS catshows;
 DROP TABLE IF EXISTS cats;
 DROP TABLE IF EXISTS members;
 
@@ -21,6 +23,7 @@ CREATE TABLE cats
     memberId INT,
     FOREIGN KEY (memberId)
     REFERENCES members(memberId)
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+    image LONGBLOB
 );
 
