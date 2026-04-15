@@ -55,4 +55,16 @@ public class CatService {
     public List<Cat> findCatsByMemberId(int memberId) {
         return iCatRepository.findCatsByMemberId(memberId);
     }
+
+    public void deleteCat(int catId) {
+        if (catId <= 0) {
+            throw new ValidationExceptionCat("Ugyldigt catId");
+        }
+
+        try {
+            iCatRepository.deleteCat(catId);
+        } catch (Exception ex) {
+            throw new ValidationExceptionCat("Kunne ikke slette katten");
+        }
+    }
 }

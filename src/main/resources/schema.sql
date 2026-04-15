@@ -27,3 +27,20 @@ CREATE TABLE cats
     image LONGBLOB
 );
 
+CREATE TABLE catshows (
+                          catShowId INT PRIMARY KEY AUTO_INCREMENT,
+                          title VARCHAR(100) NOT NULL,
+                          location VARCHAR(100) NOT NULL,
+                          date DATETIME NOT NULL
+);
+
+CREATE TABLE catshow_registrations (
+                                       registrationId INT PRIMARY KEY AUTO_INCREMENT,
+                                       catId INT NOT NULL,
+                                       catShowId INT NOT NULL,
+                                       registrationDate DATETIME NOT NULL,
+                                       status VARCHAR(50),
+                                       FOREIGN KEY (catId) REFERENCES cats(catId),
+                                       FOREIGN KEY (catShowId) REFERENCES catshows(catShowId)
+);
+
