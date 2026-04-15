@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+    <meta charset="UTF-8">
+    <title>Se alle medlemer</title>
+</head>
+<body>
+<div class="header">
+    <span style="color: white; font-weight: bold;">Racekatteklubben</span>
+    <div class="header-right">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Log ud</button>
+        </form>
+    </div>
+</div>
+
+<div class="menu">
+    <a th:href="@{/homePageLoginTrue}">Forside</a>
+    <a th:href="@{/profile}">Min Profil</a>
+    <a th:href="@{/allMembers}">Alle Medlemmer</a>
+</div>
+
+<div class="container">
+    <h1>Alle Medlemmer</h1>
+    <p th:if="${allMembers.isEmpty()}">Ingen medlemmer fundet.</p>
+
+    <div class="table-responsive" th:if="${!allMembers.isEmpty()}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Navn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="member : ${allMembers}">
+                    <td th:text="${member.name}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/homePageLoginTrue}">Tilbage til forsiden</a>
+    </div>
+</div>
+
+</body>
+</html>

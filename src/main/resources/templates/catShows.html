@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Katteudstillinger – Racekatteklubben</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Katteudstillinger</h2>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <div th:if="${catShows != null and !catShows.isEmpty()}">
+        <table>
+            <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Lokation</th>
+                <th>Dato</th>
+                <th>Tilmeld kat</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="catShow : ${catShows}">
+                <td th:text="${catShow.title}">Titel</td>
+                <td th:text="${catShow.location}">Lokation</td>
+                <td th:text="${catShow.date}">Dato</td>
+                <td>
+                    <form th:action="@{/registerCatToShow}" method="post" class="show-register-form">
+                        <input type="hidden" name="catShowId" th:value="${catShow.catShowId}">
+
+                        <select name="catId" required>
+                            <option value="">-- Vælg kat --</option>
+                            <option th:each="cat : ${cats}"
+                                    th:value="${cat.catId}"
+                                    th:text="${cat.name}">
+                            </option>
+                        </select>
+
+                        <button type="submit">Tilmeld</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:unless="${catShows != null and !catShows.isEmpty()}">
+        <p>Der findes ingen katteudstillinger endnu.</p>
+    </div>
+
+    <div class="links">
+        <p><a th:href="@{/}">Tilbage til forsiden</a></p>
+    </div>
+</div>
+
+</body>
+</html>
