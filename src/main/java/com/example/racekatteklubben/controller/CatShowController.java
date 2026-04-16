@@ -64,10 +64,24 @@ public class CatShowController {
             return "catShows";
         }
     }
+    @GetMapping("/registered")
+    public String showRegistered(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("member", member);
+        model.addAttribute("cats", catService.findCatsByMemberId(member.getMemberId()));
+
+        return "registered";
+    }
 
     @PostMapping("/deleteRegistration")
     public String deleteRegistration(@RequestParam("registrationId") int registrationId,
                                      HttpSession session) {
+
         Member member = (Member) session.getAttribute("member");
 
         if (member == null) {
@@ -75,6 +89,7 @@ public class CatShowController {
         }
 
         catShowRegistrationService.deleteRegistration(registrationId);
-        return "redirect:/catShows";
+
+        return "redirect:/registered"; // vigtigt: tilbage til din side
     }
 }

@@ -10,9 +10,9 @@
 <div class="container">
     <h2>Katteudstillinger</h2>
 
-    <div th:if="${error}" class="error" th:text="${error}"></div>
 
-    <div th:if="${catShows != null and !catShows.isEmpty()}">
+
+    <div>
         <table>
             <thead>
             <tr>
@@ -46,9 +46,6 @@
         </table>
     </div>
 
-    <div th:unless="${catShows != null and !catShows.isEmpty()}">
-        <p>Der findes ingen katteudstillinger endnu.</p>
-    </div>
 
     <div class="links">
         <p><a th:href="@{/}">Tilbage til forsiden</a></p>

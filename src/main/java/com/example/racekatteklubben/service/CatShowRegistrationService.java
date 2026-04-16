@@ -44,10 +44,6 @@ public class CatShowRegistrationService {
         return iCatShowRegistrationRepository.findByCatId(catId);
     }
 
-    public List<CatShowRegistration> findRegistrationsByCatShowId(int catShowId) {
-        return iCatShowRegistrationRepository.findByCatShowId(catShowId);
-    }
-
     public void deleteRegistration(int registrationId) {
         iCatShowRegistrationRepository.deleteRegistration(registrationId);
     }
