@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tilmeldte katte</title>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Mine tilmeldinger</h2>
+
+    <div th:if="${#lists.isEmpty(cats)}">
+        <p>Du har ingen katte.</p>
+    </div>
+
+    <div th:each="cat : ${cats}" class="cat-block">
+        <h3 th:text="${cat.name}">Kattenavn</h3>
+
+        <!-- Hent registreringer for denne kat -->
+        <div th:with="registrations=${@catShowRegistrationService.findRegistrationsByCatId(cat.catId)}">
+
+            <div th:if="${#lists.isEmpty(registrations)}">
+                <p>Ingen tilmeldinger</p>
+            </div>
+
+            <table th:if="${not #lists.isEmpty(registrations)}">
+                <thead>
+                <tr>
+                    <th>Registration ID</th>
+                    <th>Show ID</th>
+                    <th>Dato</th>
+                    <th>Status</th>
+                    <th>Handling</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="registration : ${registrations}">
+                    <td th:text="${registration.registrationId}">1</td>
+                    <td th:text="${registration.catShowId}">1</td>
+                    <td th:text="${registration.registrationDate}">Dato</td>
+                    <td th:text="${registration.status}">Status</td>
+                    <td>
+                        <form th:action="@{/deleteRegistration}" method="post">
+                            <input type="hidden" name="registrationId"
+                                   th:value="${registration.registrationId}">
+                            <button type="submit">Slet</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="links">
+        <a href="/">Tilbage til forsiden</a>
+    </div>
+</div>
+
+</body>
+</html>
