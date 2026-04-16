@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -61,12 +65,16 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed;
 }
 
 table th, table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
 }
 
 table th {
@@ -149,30 +157,6 @@ input {
     font-size: 14px;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #4a90e2;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #357ab8;
-}
-
-.error {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border-radius: 6px;
-}
-
 .header {
     position: fixed;
     background-color: #4a90e2;
@@ -233,12 +217,6 @@ button:hover {
 
     .menu {
         margin-top: 110px;
-    }
-
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
     }
 
     .menu a {
