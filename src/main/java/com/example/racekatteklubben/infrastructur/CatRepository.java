@@ -1,7 +1,6 @@
 package com.example.racekatteklubben.infrastructur;
 
 import com.example.racekatteklubben.domain.Cat;
-import com.example.racekatteklubben.domain.Member;
 import com.example.racekatteklubben.domain.Race;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -93,9 +92,9 @@ public class CatRepository implements ICatRepository {
                 cat.getDad(),
                 cat.getColor(),
                 cat.getRace().name(),
+                cat.getImage(),
                 cat.getCatId(),
-                cat.getMemberId(),
-                cat.getImage()
+                cat.getMemberId()
         );
     }
 

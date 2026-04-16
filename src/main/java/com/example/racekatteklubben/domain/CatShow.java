@@ -1,7 +1,6 @@
 package com.example.racekatteklubben.domain;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class CatShow {
     private int catShowId;
@@ -14,9 +13,6 @@ public class CatShow {
         this.title = title;
         this.location = location;
         this.date = date;
-    }
-
-    public CatShow() {
     }
 
     public int getCatShowId() {

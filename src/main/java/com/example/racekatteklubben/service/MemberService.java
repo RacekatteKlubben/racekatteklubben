@@ -66,6 +66,9 @@ public class MemberService {
     }
 
     public void deleteMember(int memberId){
+        if (memberId < 0){
+            throw new ValidationExceptionMember("Id kan ikke være negativt");
+        }
         try {
             iMemberRepository.deleteMember(memberId);
         } catch (Exception ex) {
@@ -73,10 +76,7 @@ public class MemberService {
         }
     }
 
-
     public List<Member> findAllMembers() {
         return iMemberRepository.findAllMembers();
     }
-
-
 }

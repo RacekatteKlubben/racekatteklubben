@@ -15,6 +15,7 @@ public class MemberRepository implements IMemberRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
     public void createMember(Member member) {
         String sql = "INSERT INTO members(name, password, email, phonenumber) VALUES (?,?,?,?)";
 
@@ -27,6 +28,7 @@ public class MemberRepository implements IMemberRepository {
         );
     }
 
+    @Override
     public void updateMember(Member member) {
         String Sql = "UPDATE members SET name= ?, password = ?, email = ?, phonenumber = ? WHERE memberid = ?";
 
@@ -58,7 +60,6 @@ public class MemberRepository implements IMemberRepository {
                 )
         );
     }
-
 
     public List<Member> memberSearch(String query) {
         String sql = "SELECT memberId, name, email, password, phoneNumber " +
@@ -99,5 +100,4 @@ public class MemberRepository implements IMemberRepository {
                 )
         );
     }
-
 }

@@ -107,7 +107,7 @@ public class Validation {
             }
         }
 
-        if (color == null && color.isEmpty()) {
+        if (color == null || color.isEmpty()) {
             throw new ValidationExceptionCat("Farve kan ikke være tom eller null");
         }
 

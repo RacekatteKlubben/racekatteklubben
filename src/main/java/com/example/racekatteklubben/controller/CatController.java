@@ -27,13 +27,14 @@ public class CatController {
     }
 
     @PostMapping("/createCat")
-    public String createCat(@ModelAttribute Cat cat, HttpSession session, Model model, @RequestParam ("image") MultipartFile image) {
+    public String createCat(@ModelAttribute Cat cat, HttpSession session, Model model, @RequestParam ("imageFile") MultipartFile image) {
         Member member = (Member) session.getAttribute("member");
 
         if (member == null){
             return "redirect:/login";
         }
 
+        //Tilføjelse af billede
         if (!image.isEmpty()) {
             try {
                 byte[] bytes = image.getBytes();
@@ -61,7 +62,6 @@ public class CatController {
         return cat.getImage();
     }
 
-
     @GetMapping("/catPage")
     public String catPage(HttpSession session, Model model) {
 
@@ -78,14 +78,22 @@ public class CatController {
     @PostMapping("/updateCat")
     public String updateCat(@ModelAttribute("cat") Cat updatedCat,
                                HttpSession session,
-                               Model model) {
+                               Model model, @RequestParam ("imageFile") MultipartFile image) {
         try {
             Member member = (Member) session.getAttribute("member");
             if (member == null){
                 return "redirect:/login";
             }
 
-            System.out.println(">>> updateCat POST controller HIT");
+            if (!image.isEmpty()) {
+                try {
+                    byte[] bytes = image.getBytes();
+                    updatedCat.setImage(bytes);
+                } catch (IOException ioe){
+                    model.addAttribute("error", "Kunne ikke oploade billede");
+                    return "updateCat";
+                }
+            }
 
             updatedCat.setMemberId(member.getMemberId());
 

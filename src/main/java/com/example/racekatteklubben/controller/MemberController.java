@@ -154,7 +154,6 @@ public class MemberController {
         return "homePageLoginTrue";
     }
 
-
     @GetMapping("/allMembers")
     public String showAllMembers(Model model, HttpSession session) {
         Member loggedInMember = (Member) session.getAttribute("member");

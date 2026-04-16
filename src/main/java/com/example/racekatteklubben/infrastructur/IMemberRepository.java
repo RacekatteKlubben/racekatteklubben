@@ -1,7 +1,6 @@
 package com.example.racekatteklubben.infrastructur;
 
 import com.example.racekatteklubben.domain.Member;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

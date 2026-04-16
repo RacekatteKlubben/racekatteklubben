@@ -17,17 +17,21 @@ public class CatShowRegistrationRepository implements ICatShowRegistrationReposi
     @Override
     public void createRegistration(CatShowRegistration registration) {
         String sql = """
-                INSERT INTO catshow_registrations(catId, catShowId, registrationDate, status)
-                VALUES (?, ?, ?, ?)
-                """;
+            INSERT INTO catshow_registrations(catId, catShowId, registrationDate, status)
+            VALUES (?, ?, ?, ?)
+            """;
 
-        jdbcTemplate.update(
-                sql,
-                registration.getCatId(),
-                registration.getCatShowId(),
-                registration.getRegistrationDate(),
-                registration.getStatus()
-        );
+        try {
+            jdbcTemplate.update(
+                    sql,
+                    registration.getCatId(),
+                    registration.getCatShowId(),
+                    registration.getRegistrationDate(),
+                    registration.getStatus()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Fejl ved gemning i database: ");
+        }
     }
 
     @Override

@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" th:href="@{/universal.css}">
+    <meta charset="UTF-8">
+    <title>Se alle dine katte</title>
+</head>
+
+<!DOCTYPE html>
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -18,21 +26,21 @@
             <th>Far</th>
             <th>Farve</th>
             <th>Race</th>
+            <th>Billede</th>
+            <th>Handlinger</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cat : ${cats}">
-            <td>
-                <img th:if="${cat.image != null}"
-                     th:src="@{/catImage/{id}(id=${cat.catId})}"
-                     alt="Kat"
-                     style="width: 100px;" />
-            </td>
             <td th:text="${cat.name}"></td>
             <td th:text="${cat.mom}"></td>
             <td th:text="${cat.dad}"></td>
             <td th:text="${cat.color}"></td>
             <td th:text="${cat.race}"></td>
+
+            <td>
+                <img th:src="@{'/catImage/' + ${cat.catId}}" width="100"/>
+            </td>
 
             <td>
                 <form th:action="@{/updateCat}" method="get">
@@ -45,8 +53,6 @@
                     <button type="submit">Slet</button>
                 </form>
             </td>
-
-            <th>Billede</th>
 
         </tr>
         </tbody>

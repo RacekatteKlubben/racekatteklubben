@@ -10,7 +10,7 @@
 <div class="container">
     <h2>Opret ny kat</h2>
 
-    <form th:action="@{/createCat}" th:object="${cat}" method="post">
+    <form th:action="@{/createCat}" th:object="${cat}" method="post" enctype="multipart/form-data">
 
         <label for="name">Navn</label>
         <input type="text" id="name" th:field="*{name}" required>
@@ -32,7 +32,7 @@
         </select>
 
         <label for="image">Billede af katten</label>
-        <input type="file" id="image" name="image" accept="image/*">
+        <input type="file" id="image" name="imageFile" accept="image/*">
 
         <button type="submit">Opret kat</button>
         <div th:if="${error}" class="error" th:text="${error}"></div>
